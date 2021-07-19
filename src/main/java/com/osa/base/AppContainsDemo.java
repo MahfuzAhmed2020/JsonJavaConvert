@@ -15,17 +15,24 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import com.osa.js.JsonConvertDemo;
+
 public class AppContainsDemo {
 	
 	public static void main(String[] args) {
-//		Object [][]s=getValue("C:\\Users\\mahfu\\Desktop\\ExelTemp\\TestDemo.xlsx","Sheet1");
+//		Object [][]s=getValue("C:\\Users\\mahfu\\Desktop\\ExelTemp\\TestDemo.xlsx", "JsonData");
 //		for (Object[] objects :s ) {
 //			for (Object s1 : objects) {
 //				System.out.println(s1);
 //			}
 //		}
-		//getWorkbookDataByRow("C:\\Users\\mahfu\\Desktop\\ExelTemp\\TestDemo.xlsx","labor",9);
-		readToExcelByCell("b2");
+		Object [][] p=getWorkbookDataByRow(/*"C:\\Users\\mahfu\\Desktop\\ExelTemp\\TestDemo.xlsx", "JsonData",*/4);
+		for (int i = 0; i < p.length; i++) {
+			System.out.println(JsonConvertDemo.getPayload(p[i]));
+		}
+		//String r=readToExcelByCell("A:4");
+		
+		
 	}
 
 	public static Object[][] getValue(String filePath,String sheetName) {
@@ -63,12 +70,12 @@ public class AppContainsDemo {
 		try {
 			InputStream file = new FileInputStream("C:\\Users\\mahfu\\Desktop\\ExelTemp\\TestDemo.xlsx"/*excelFilePath*/);
 			XSSFWorkbook workBook = new XSSFWorkbook(file);
-			XSSFSheet sheetName = workBook.getSheet("labor"/*sheetName*/);
+			XSSFSheet sheetName = workBook.getSheet("JsonData"/*sheetName*/);
 			CellReference cf = new CellReference(cellNumber);
 			Row row = sheetName.getRow(cf.getRow());
 			Cell cell = row.getCell(cf.getCol());
 			value = cell.getStringCellValue();
-			// System.out.println(value);
+			 System.out.println(value);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,17 +84,17 @@ public class AppContainsDemo {
 		}
 		return value;
 	}
-public static String[][] getWorkbookDataByRow(String filePath, String sheetName, int num) {
+public static String[][] getWorkbookDataByRow(/*String filePath, String sheetName,*/ int num) {
 
 	  String[][] dataTable=null;
-		File file = new File(filePath);
+		//File file = new File("C:\\Users\\mahfu\\Desktop\\ExelTemp\\TestDemo.xlsx");
 		try {
 			
 			// create a file input stream to read Excel workbook and worksheet
-			FileInputStream fileInput = new FileInputStream(file);
+			FileInputStream fileInput = new FileInputStream("C:\\Users\\mahfu\\Desktop\\ExelTemp\\TestDemo.xlsx");
 			XSSFWorkbook xlWBook = new XSSFWorkbook(fileInput);
 			//XSSFSheet xlSheet = xlWBook.getSheetAt(0);//Reading sheet1 on index 0
-			XSSFSheet xlSheet = xlWBook.getSheet(sheetName);
+			XSSFSheet xlSheet = xlWBook.getSheet("JsonData"/*sheetName*/);
 			// get the number of rows and columns
 			int numRows = xlSheet.getFirstRowNum()+num; //u could get specific row by use getFirstRowNum()
 			int numCols = xlSheet.getRow(0).getLastCellNum();
