@@ -8,18 +8,19 @@ import com.osa.base.AppContainsDemo;
 public class JsonConvertDemo {
 	public static void main(String[] args) {
 		Object[][] students=AppContainsDemo.getValue("C:\\Users\\mahfu\\Desktop\\ExelTemp\\TestDemo.xlsx", "JsonData");
-//		Object[][] clients = { { "Md", "mahfuz", "3473570373", "abc.l@yahoo.com" },
-//				{ "ifti", "shayan", "123456786", "xyz@yahoo.com" } };
-		Object []a=new Object[100];
-		
-//		for (Object[] objects :students ) {
-//			for (Object s1 : objects) {
-//				System.out.println(s1);
-//			}
-//		}
+
+		Object []a=new Object[10];
+
+		System.out.println("*************To get whole sheet ****************");	
+		for (Object[] objects :students ) {
+			for (Object s1 : objects) {
+				System.out.print(s1+"    ");
+			}System.out.println();
+		}
 		/**
 		 * To get whole sheet as json structure
 		 */
+		System.out.println("*************To get whole sheet as json structure ****************");
 		for (int i = 0; i < students.length; i++) {
 			a[i]=getPayload(students[i]);
 			System.out.println(getPayload(students[i]));
@@ -28,20 +29,31 @@ public class JsonConvertDemo {
 		/**
 		 * To get ONE ROW as json structure
 		 */
-		System.out.println("To get whole ONE ROW as json structure \n"+a[0]);
+		System.out.println("##########To get whole ONE ROW as json structure  a[0] #############\n"+a[0]);
+		System.out.println("$$$$$$$$$$$$$$ Object[][] clients $$$$$$$$$$$\n");	
+		for(Object p:a) {
+			System.out.println(p);
+		}
+		System.out.println("^^^^^^^^^^^ to get Object[][] clients  *******Object []cl=new Object[10]; ^^^^^^^^^^^^^^\n");
 		
-//		for(Object p:a) {
-//			System.out.println(p);
-//		}
 		
-//		for (Object[] objects :clients ) {
-//			for (Object s1 : objects) {
-//				System.out.println(s1);
-//			}
-//		}
-//		for (int i = 0; i < clients.length; i++) {
-//			System.out.println(getPayload(clients[i]));
-//		}
+		Object[][] clients = { { "ifti", "abrar", "101010011", "iabrar@client.com" },
+				{ "mehrab", "shayan", "123456786", "mshayan@client.com" } };
+		Object []cl=new Object[10];
+		
+		for (Object[] objects :clients ) {
+			for (Object s1 : objects) {
+				System.out.print(s1+"  ");
+				
+			}System.out.println();
+		}
+		System.out.println("******** To get whole sheet as json structure int i = 0; i < clients.length; i++ ************\n");
+		for (int i = 0; i < clients.length; i++) {
+			cl[i]=getPayload(clients[i]);
+			System.out.println(getPayload(clients[i]));
+		}
+		
+		System.out.println("##########To get whole ONE ROW as json structure  cl[0] #############\n"+cl[0]);
 	}
 
 	public static String getPayload(Object[] students) {
